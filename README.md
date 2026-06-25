@@ -1,6 +1,6 @@
 # EventHub Selenium Automation Framework
 
-![CI](https://github.com/YOUR_USERNAME/selenium-java-project/actions/workflows/selenium-tests.yml/badge.svg)
+![Jenkins](https://img.shields.io/badge/CI-Jenkins-D24939?logo=jenkins&logoColor=white)
 ![Java](https://img.shields.io/badge/Java-21-orange?logo=openjdk)
 ![Maven](https://img.shields.io/badge/Maven-3.9-red?logo=apachemaven)
 ![Selenium](https://img.shields.io/badge/Selenium-4.21-43B02A?logo=selenium)
