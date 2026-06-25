@@ -1,0 +1,26 @@
+{
+  "validCard": {
+    "number": "4111111111111111",
+    "expiry": "12/26",
+    "cvv": "123",
+    "holderName": "Test User"
+  },
+  "declinedCard": {
+    "number": "4000000000000002",
+    "expiry": "12/26",
+    "cvv": "123",
+    "holderName": "Test User"
+  },
+  "promoCodes": [
+    {
+      "code": "SAVE10",
+      "discountPercent": 10,
+      "baseAmount": 500.0
+    },
+    {
+      "code": "FLAT20",
+      "discountPercent": 20,
+      "baseAmount": 500.0
+    }
+  ]
+}

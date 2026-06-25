@@ -1,0 +1,10 @@
+{
+  "validUser": {
+    "email": "YOUR_EMAIL_HERE",
+    "password": "YOUR_PASSWORD_HERE"
+  },
+  "invalidTokens": [
+    "invalid_token_abc123",
+    "expired_token_xyz999"
+  ]
+}

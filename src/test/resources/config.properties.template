@@ -1,0 +1,19 @@
+# ── Application ───────────────────────────────────────────────────────────────
+app.base.url=https://eventhub.rahulshettyacademy.com
+app.api.base.url=https://api.eventhub.rahulshettyacademy.com
+
+# ── Credentials ───────────────────────────────────────────────────────────────
+# Copy this file to config.properties and fill in your registered account.
+# config.properties is gitignored — never commit real credentials.
+# Environment variable overrides are also supported: APP_EMAIL, APP_PASSWORD
+app.email=YOUR_EMAIL_HERE
+app.password=YOUR_PASSWORD_HERE
+
+# ── WebDriver timeouts (seconds) ───────────────────────────────────────────────
+implicit.wait.seconds=10
+explicit.wait.seconds=15
+
+# ── Test card numbers (Stripe test cards) ─────────────────────────────────────
+test.card.number=4111111111111111
+test.card.expiry=12/26
+test.card.cvv=123

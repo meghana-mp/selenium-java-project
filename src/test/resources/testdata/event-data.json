@@ -1,0 +1,11 @@
+{
+  "eventTemplate": {
+    "city": "Automation City",
+    "venue": "Automation Venue",
+    "category": "Tech",
+    "price": 100,
+    "totalSeats": 50,
+    "description": "Created by automated test",
+    "daysOffset": 7
+  }
+}

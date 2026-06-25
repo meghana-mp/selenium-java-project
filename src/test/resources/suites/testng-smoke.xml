@@ -1,0 +1,37 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<!--
+    Smoke suite — 6 critical-path tests that must pass before every release.
+    Tests tagged groups={"smoke"}: TC_AUTH_001, TC_SEARCH_001, TC_BOOKING_001,
+                                   TC_PAYMENT_001, TC_HYBRID_001, TC_ALERT_002.
+
+    Retry logic: RetryListener (IAnnotationTransformer) is registered below.
+    It auto-wires RetryAnalyzer onto every smoke-tagged @Test at suite startup.
+    Each failing smoke test retries up to 2 times with 1 s → 2 s exponential
+    back-off before being marked FAILED. Retry attempts are counted as separate
+    runs in the TestNG total — a clean run reports exactly 6.
+
+    Run: mvn test -Dsuite=smoke
+         mvn test -Dsuite=smoke -Dbrowser=firefox
+-->
+<suite name="EventHub Smoke Suite" verbose="1" parallel="methods" thread-count="2">
+
+    <parameter name="browser" value="chrome"/>
+
+    <listeners>
+        <listener class-name="com.eventhub.tests.listeners.AllureListener"/>
+        <listener class-name="com.eventhub.tests.listeners.TestListener"/>
+        <listener class-name="com.eventhub.tests.listeners.RetryListener"/>
+    </listeners>
+
+    <test name="Smoke Tests">
+        <groups>
+            <run>
+                <include name="smoke"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="com.eventhub.tests"/>
+        </packages>
+    </test>
+
+</suite>

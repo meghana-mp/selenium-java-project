@@ -1,0 +1,37 @@
+# ── Build output ──────────────────────────────────────────────────────────────
+target/
+
+# ── CREDENTIALS — never commit real values ────────────────────────────────────
+# Use the .template files as a guide; fill in your own values locally.
+src/test/resources/config.properties
+
+# ── IDE ───────────────────────────────────────────────────────────────────────
+.idea/
+*.iml
+.vscode/
+*.swp
+
+# ── macOS ─────────────────────────────────────────────────────────────────────
+.DS_Store
+__MACOSX/
+
+# ── Allure CLI install (managed by .allure/) ──────────────────────────────────
+.allure/
+
+# ── Rogue directory created by misquoted allure generate command ──────────────
+\"/
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── Compiled class files (safety net — normally inside target/) ───────────────
+*.class
+
+# ── Internal / developer notes — not for public repo ─────────────────────────
+StepsFollowed.md
+FRAMEWORK_DOCUMENTATION.md
+
+# ── Docker ────────────────────────────────────────────────────────────────────
+# docker-compose.override.yml may contain local env overrides
+docker-compose.override.yml

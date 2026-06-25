@@ -1,0 +1,25 @@
+{
+  "ticketQuantities": {
+    "zero": 0,
+    "negative": -2,
+    "overLimit": 101,
+    "valid": 2
+  },
+  "attendees": {
+    "booking": {
+      "name": "Test User",
+      "email": "testuser@example.com",
+      "phone": "9999999999"
+    },
+    "cancellation": {
+      "name": "Toast Test User",
+      "email": "toast@test.com",
+      "phone": "8888888888"
+    },
+    "navigation": {
+      "name": "Back Test",
+      "email": "back@test.com",
+      "phone": "7777777777"
+    }
+  }
+}

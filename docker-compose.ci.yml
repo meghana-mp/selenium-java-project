@@ -1,0 +1,9 @@
+# CI override — applies on top of docker-compose.yml for Jenkins / GitHub Actions (x86-64 Linux).
+# Local dev still uses docker-compose.yml alone (ARM64 Chromium for Apple Silicon).
+#
+# Usage:
+#   docker compose -f docker-compose.yml -f docker-compose.ci.yml up
+services:
+  selenium:
+    image: selenium/standalone-chrome:4.21.0
+    platform: linux/amd64

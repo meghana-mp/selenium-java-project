@@ -1,0 +1,10 @@
+{
+  "validSearches": [
+    {
+      "keyword": "Tech",
+      "category": "Tech",
+      "location": ""
+    }
+  ],
+  "gibberishQuery": "xyz123abc!!!"
+}

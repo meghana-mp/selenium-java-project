@@ -1,0 +1,14 @@
+{
+  "invalidRegistration": {
+    "email": "test@com",
+    "password": "abc",
+    "phone": ""
+  },
+  "validRegistration": {
+    "firstName": "Auto",
+    "lastName": "Tester",
+    "email": "autotest@example.com",
+    "password": "Test@1234",
+    "phone": "9876543210"
+  }
+}

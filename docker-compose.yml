@@ -1,0 +1,46 @@
+services:
+
+  # ── Selenium Grid ────────────────────────────────────────────────────────────
+  # seleniarm/standalone-chromium is the ARM64-native image for Apple Silicon M1/M2/M3.
+  # Official selenium/standalone-chrome is x86-only and would run under slow Rosetta emulation.
+  selenium:
+    image: seleniarm/standalone-chromium:latest
+    platform: linux/arm64
+    shm_size: '2gb'               # Chrome crashes without enough shared memory
+    ports:
+      - "4444:4444"               # WebDriver endpoint  → http://localhost:4444/wd/hub
+      - "7900:7900"               # noVNC live viewer   → http://localhost:7900  (password: secret)
+    environment:
+      SE_NODE_MAX_SESSIONS: 2     # matches thread-count="2" in testng suite XMLs
+      SE_NODE_SESSION_TIMEOUT: 300
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4444/wd/hub/status"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+
+  # ── Test Runner ──────────────────────────────────────────────────────────────
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      selenium:
+        condition: service_healthy   # waits until Chrome grid is ready before starting tests
+    environment:
+      # Detected by BrowserFactory: non-blank → RemoteWebDriver, blank → local ChromeDriver
+      SELENIUM_REMOTE_URL: http://selenium:4444/wd/hub
+    volumes:
+      # Mount only the report output dirs — NOT full target/ to avoid stale
+      # maven-status files from the host build causing "Resource deadlock" in
+      # the container's Maven compiler.
+      - ./target/allure-results:/app/target/allure-results
+      - ./target/surefire-reports:/app/target/surefire-reports
+      - ./target/logs:/app/target/logs
+      - maven-cache:/root/.m2       # reuse downloaded deps across runs (speeds up re-runs)
+    command: mvn test -Dsuite=${SUITE:-full} -Dbrowser=chrome --no-transfer-progress
+
+# Named volume so Maven deps persist between docker-compose runs
+volumes:
+  maven-cache:
