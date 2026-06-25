@@ -44,7 +44,14 @@ pipeline {
             }
         }
 
-        // ── 3. Run tests inside Docker (Selenium Grid + Maven) ────────────────
+        // ── 3. Ensure port 4444 is free before starting ───────────────────────
+        stage('Cleanup Previous Run') {
+            steps {
+                sh 'docker compose -f docker-compose.yml down -v --remove-orphans || true'
+            }
+        }
+
+        // ── 4. Run tests inside Docker (Selenium Grid + Maven) ────────────────
         // Uses ARM64 Chromium image — matches local Mac M-series hardware.
         // docker-compose.ci.yml is only needed for Linux/AMD64 Jenkins agents.
         stage('Run Tests') {
