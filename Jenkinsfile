@@ -45,9 +45,14 @@ pipeline {
         }
 
         // ── 3. Ensure port 4444 is free before starting ───────────────────────
+        // Kills any container on port 4444 regardless of which compose project owns it
         stage('Cleanup Previous Run') {
             steps {
-                sh 'docker compose -f docker-compose.yml down -v --remove-orphans || true'
+                sh '''
+                    docker compose -f docker-compose.yml down -v --remove-orphans || true
+                    CID=$(docker ps -q --filter "publish=4444")
+                    if [ -n "$CID" ]; then docker stop $CID && docker rm $CID; fi
+                '''
             }
         }
 
