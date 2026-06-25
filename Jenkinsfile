@@ -9,6 +9,11 @@ pipeline {
         )
     }
 
+    // Add Docker and common tool paths for macOS Jenkins agents
+    environment {
+        PATH = "/usr/local/bin:/opt/homebrew/bin:${env.PATH}"
+    }
+
     stages {
 
         // ── 1. Pull source from GitHub ────────────────────────────────────────
@@ -20,6 +25,7 @@ pipeline {
 
         // ── 2. Inject credentials from Jenkins Credential Store ───────────────
         // Requires two Secret Text credentials with IDs: APP_EMAIL, APP_PASSWORD
+        // Uses macOS-compatible sed -i '' syntax
         stage('Inject Credentials') {
             steps {
                 withCredentials([
@@ -29,25 +35,24 @@ pipeline {
                     sh '''
                         cp src/test/resources/config.properties.template \
                            src/test/resources/config.properties
-                        sed -i "s/YOUR_EMAIL_HERE/${APP_EMAIL}/g"       src/test/resources/config.properties
-                        sed -i "s/YOUR_PASSWORD_HERE/${APP_PASSWORD}/g" src/test/resources/config.properties
-                        sed -i "s/YOUR_EMAIL_HERE/${APP_EMAIL}/g"       src/test/resources/testdata/auth-data.json
-                        sed -i "s/YOUR_PASSWORD_HERE/${APP_PASSWORD}/g" src/test/resources/testdata/auth-data.json
+                        sed -i '' "s/YOUR_EMAIL_HERE/${APP_EMAIL}/g"       src/test/resources/config.properties
+                        sed -i '' "s/YOUR_PASSWORD_HERE/${APP_PASSWORD}/g" src/test/resources/config.properties
+                        sed -i '' "s/YOUR_EMAIL_HERE/${APP_EMAIL}/g"       src/test/resources/testdata/auth-data.json
+                        sed -i '' "s/YOUR_PASSWORD_HERE/${APP_PASSWORD}/g" src/test/resources/testdata/auth-data.json
                     '''
                 }
             }
         }
 
         // ── 3. Run tests inside Docker (Selenium Grid + Maven) ────────────────
-        // docker-compose.ci.yml overrides the ARM64 Chromium image with x86-64 Chrome
-        // suitable for standard Linux Jenkins agents.
+        // Uses ARM64 Chromium image — matches local Mac M-series hardware.
+        // docker-compose.ci.yml is only needed for Linux/AMD64 Jenkins agents.
         stage('Run Tests') {
             steps {
                 sh """
                     SUITE=${params.SUITE} \
                     docker compose \
                         -f docker-compose.yml \
-                        -f docker-compose.ci.yml \
                         up --build --abort-on-container-exit --exit-code-from tests
                 """
             }
@@ -64,7 +69,7 @@ pipeline {
                 reportBuildPolicy: 'ALWAYS',
                 results          : [[path: 'target/allure-results']]
             ])
-            sh 'docker compose -f docker-compose.yml -f docker-compose.ci.yml down -v --remove-orphans || true'
+            sh 'docker compose -f docker-compose.yml down -v --remove-orphans || true'
         }
         success {
             echo "All ${params.SUITE} tests passed."
