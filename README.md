@@ -27,6 +27,7 @@ containerisation with Allure reporting.
 - [Project Structure](#project-structure)
 - [Quick Start](#quick-start)
 - [Docker — Headless Execution](#docker--headless-execution)
+- [Jenkins CI Pipeline](#jenkins-ci-pipeline)
 - [Allure Report](#allure-report)
 - [Credential Setup](#credential-setup)
 
@@ -678,6 +679,64 @@ mvn allure:serve
 **Why Seleniarm?** The official `selenium/standalone-chrome` image is x86-only. Running it on an
 M2 Mac via Rosetta emulation causes ~3x slower execution and intermittent Chrome crashes.
 `seleniarm/standalone-chromium` runs natively on ARM64 with no emulation overhead.
+
+---
+
+## Jenkins CI Pipeline
+
+The project ships a `Jenkinsfile` (declarative pipeline) that clones this repo, injects credentials,
+and runs the test suite inside Docker — the same containers used for local headless execution.
+
+### Pipeline stages
+
+| Stage | What it does |
+|---|---|
+| **Checkout** | Clones the repo from GitHub using stored credentials |
+| **Inject Credentials** | Copies `config.properties.template` → `config.properties` and replaces `YOUR_EMAIL_HERE` / `YOUR_PASSWORD_HERE` placeholders using Jenkins Secret Text credentials |
+| **Cleanup Previous Run** | Runs `docker compose down` and force-stops any container on port 4444 to prevent "port already allocated" errors from previous builds |
+| **Run Tests** | Starts Selenium Grid + Maven test runner via `docker compose up` |
+| **Post — Allure** | Publishes the Allure HTML report as a build artifact (always runs, even on failure) |
+| **Post — Cleanup** | Tears down all containers and volumes after every build |
+
+### One-time Jenkins setup
+
+**1. Install plugins** — Manage Jenkins → Plugins → Available:
+
+| Plugin | Purpose |
+|---|---|
+| Git Plugin | Clone from GitHub |
+| Pipeline | Declarative `Jenkinsfile` support |
+| Credentials Binding Plugin | `withCredentials` block |
+| Allure Jenkins Plugin | Publish Allure HTML report tab |
+
+**2. Add credentials** — Manage Jenkins → Credentials → System → Global → Add Credentials:
+
+| Kind | ID | Value |
+|---|---|---|
+| Secret text | `APP_EMAIL` | Your EventHub email |
+| Secret text | `APP_PASSWORD` | Your EventHub password |
+| Username with password | `github-credentials` | GitHub username + Personal Access Token |
+
+**3. Create the Pipeline job:**
+- New Item → **Pipeline**
+- Pipeline → Definition: `Pipeline script from SCM`
+- SCM: `Git` → Repository URL: `https://github.com/meghana-mp/selenium-java-project`
+- Branch: `*/master`
+- Script Path: `Jenkinsfile`
+
+**4. Build with Parameters** — choose the suite and click Build Now:
+
+```
+SUITE = smoke      → 6 critical-path tests
+SUITE = regression → all 20 tests
+SUITE = full       → all 20 tests, parallel execution
+```
+
+### Notes
+
+- **macOS Jenkins agent**: the `Jenkinsfile` adds `/opt/homebrew/bin` to `PATH` so Jenkins can find Docker. No extra configuration needed on Apple Silicon.
+- **Linux/AMD64 agent**: swap `docker-compose.yml` for `docker-compose.yml -f docker-compose.ci.yml` in the Run Tests stage to use the AMD64 Chrome image instead of ARM64 Chromium.
+- **Credentials never logged**: the `withCredentials` block masks `APP_EMAIL` and `APP_PASSWORD` in all console output.
 
 ---
 
