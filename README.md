@@ -9,9 +9,8 @@
 ![RestAssured](https://img.shields.io/badge/RestAssured-5.3-brightgreen)
 ![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker)
 
-A **production-grade, multi-layered UI + API test automation framework** built in Java for the
-[EventHub](https://eventhub.rahulshettyacademy.com) web application — a Next.js (React) SPA backed by
-a REST API. The framework demonstrates 10 software design patterns, parallel thread-safe execution,
+A multi-layered UI + API test automation framework** built in Java for the
+[EventHub](https://eventhub.rahulshettyacademy.com) web application. The framework demonstrates software design patterns, parallel thread-safe execution,
 hybrid API-to-UI testing, self-healing locator fallback, automatic retry logic, and full Docker
 containerisation with Allure reporting.
 
@@ -430,35 +429,6 @@ at the page-object level — the test methods themselves contain no healing code
 | WebDriverManager | Eliminates manual driver binary downloads — resolves the correct version at runtime |
 | `.dockerignore` | Prevents `target/`, `.git/`, `.idea/` from bloating the Docker build context |
 | `.gitignore` | Excludes credentials (`config.properties`, `auth-data.json`), build output, IDE files |
-
----
-
-## Test Coverage
-
-20 end-to-end scenarios across 10 feature domains:
-
-| # | Test ID | Scenario | Groups |
-|---|---|---|---|
-| 1 | TC_AUTH_001 | Successful login + session persistence (localStorage token, navbar email) | smoke, regression |
-| 2 | TC_AUTH_002 | Session expiration → auto-redirect to /login | regression |
-| 3 | TC_SEARCH_001 | Real-time multi-filter search (keyword + category) | smoke, regression |
-| 4 | TC_SEARCH_002 | No-results state for gibberish query | regression |
-| 5 | TC_FORM_001 | Registration inline validation (email format, password length, phone) | regression |
-| 6 | TC_FORM_002 | Ticket quantity boundary — UI enforces minimum of 1 | regression |
-| 7 | TC_BOOKING_001 | Standard ticket booking checkout end-to-end | smoke, regression |
-| 8 | TC_BOOKING_002 | Sold-out event prevents booking | regression |
-| 9 | TC_PAYMENT_001 | Declined card shows payment failure message | smoke, regression |
-| 10 | TC_PAYMENT_002 | Promo code applies correct percentage discount to total | regression |
-| 11 | TC_ASYNC_001 | File upload (profile banner) via hidden input — no OS dialog | regression |
-| 12 | TC_ASYNC_002 | Infinite scroll loads more event cards on page bottom | regression |
-| 13 | TC_LOC_001 | Date picker restricts past date selection | regression |
-| 14 | TC_LOC_002 | Event time displayed consistently across listing and detail views | regression |
-| 15 | TC_HYBRID_001 | Event created via REST API appears in UI search results | smoke, regression |
-| 16 | TC_HYBRID_002 | Bookmark action in UI is reflected in bookings API response | regression |
-| 17 | TC_ALERT_001 | Toast notification appears and contains text after cancel action | regression |
-| 18 | TC_ALERT_002 | Browser back button does not corrupt booking state | smoke, regression |
-| 19 | TC_LAYOUT_001 | External link opens in new tab with correct URL | regression |
-| 20 | TC_LAYOUT_002 | Mobile nav hamburger toggle works at 375px viewport | regression |
 
 ---
 
