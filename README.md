@@ -38,104 +38,11 @@ containerisation with Allure reporting.
 The framework is organised into five distinct, loosely coupled layers. Each layer has a single
 responsibility and communicates downward only.
 
-```
-┌──────────────────────────────────────────────────────────────────┐
-│                        TEST LAYER                                │
-│   LoginTest · BookingTest · PaymentTest · HybridApiUITest · …    │
-│                      extends BaseTest                            │
-└────────────────────────────┬─────────────────────────────────────┘
-                             │ instantiates
-         ┌───────────────────┴──────────────────┐
-         │          PAGE OBJECT LAYER            │
-         │  LoginPage · EventsPage · BookingPage │
-         │           extends BasePage            │
-         └───────────────────┬──────────────────┘
-                             │ delegates to
-         ┌───────────────────┴──────────────────┐
-         │           UTILITY LAYER               │
-         │  WebDriverWaitUtils · ActionUtils      │
-         │  TestUtils · ApiUtils                  │
-         └───────────────────┬──────────────────┘
-                             │ powered by
-    ┌────────────────────────┴──────────────────────────┐
-    │              INFRASTRUCTURE LAYER                  │
-    │  BrowserFactory · ConfigManager · AppConstants     │
-    └────────────────────────┬──────────────────────────┘
-                             │
-    ┌────────────────────────┴──────────────────────────┐
-    │                SUPPORT LAYER                       │
-    │  TestDataProvider · AllureListener · TestListener  │
-    │  TestNG Suite XMLs                                 │
-    └────────────────────────────────────────────────────┘
-```
+![Architecture](docs/architecture.svg)
 
 ### End-to-End Workflow
 
-```mermaid
-flowchart TD
-    LOCAL([Local: mvn test])
-    DOCKER([Docker: docker compose up])
-    JENKINS([Jenkins Pipeline])
-
-    JENKINS --> JG[GitHub Checkout]
-    JG --> JC[Inject Credentials\nAPP_EMAIL and APP_PASSWORD]
-    JC --> JCI[docker compose\n-f docker-compose.yml\n-f docker-compose.ci.yml]
-
-    LOCAL --> MVN[Maven Surefire\nreads testng-suite.xml]
-    DOCKER --> MVN
-    JCI --> MVN
-
-    MVN --> TNG[TestNG Engine\nRetryListener and AllureListener]
-    TNG --> PAR[2 parallel threads]
-    PAR --> T1[Thread 1]
-    PAR --> T2[Thread 2]
-
-    subgraph flow [Per Thread - identical flow]
-        S1[BeforeMethod setUp] --> S2[BrowserFactory.initDriver]
-        S2 --> S3{SELENIUM_REMOTE_URL?}
-        S3 -- not set --> S4[Local ChromeDriver]
-        S3 -- set --> S5[RemoteWebDriver\nSelenium Grid]
-        S4 --> S6[driver.get baseUrl]
-        S5 --> S6
-        S6 --> S7[DataProvider\nreads JSON testdata]
-        S7 --> S8[Test method\nAllure.step calls]
-        S8 --> S9[Page Object method]
-        S9 --> H1{Primary locator\nfound?}
-        H1 -- yes --> S10[WebDriverWaitUtils\nwaitForVisible / Clickable]
-        H1 -- no --> H2{Static fallback\nlocators}
-        H2 -- found --> S10
-        H2 -- all fail --> H3[Claude API\nMCP Dynamic Healing]
-        H3 --> S10
-        S10 --> S11[ActionUtils\nclearAndType and jsClick]
-        S11 --> S12[Browser interaction]
-        S12 --> S13{Assertion}
-        S13 -- pass --> S14[PASS logged]
-        S13 -- fail --> S15{Smoke test?\nRetryAnalyzer}
-        S15 -- no --> S17[AllureListener\nscreenshot and state]
-        S15 -- retries left --> S18[Wait 1s or 2s back-off]
-        S18 --> S8
-        S15 -- exhausted --> S17
-        S14 --> S16[AfterMethod tearDown\ndriver.quit and ThreadLocal.remove]
-        S17 --> S16
-    end
-
-    T1 --> flow
-    T2 --> flow
-
-    S16 --> R1[(target/allure-results)]
-    R1 --> R2[mvn allure:serve\nor Jenkins Allure plugin]
-    R2 --> R3([HTML Report in browser])
-
-    style LOCAL fill:#4CAF50,color:#fff
-    style DOCKER fill:#0db7ed,color:#fff
-    style JENKINS fill:#d24939,color:#fff
-    style R3 fill:#2196F3,color:#fff
-    style S13 fill:#FF9800,color:#fff
-    style S15 fill:#f44336,color:#fff
-    style H1 fill:#9C27B0,color:#fff
-    style H2 fill:#9C27B0,color:#fff
-    style H3 fill:#673AB7,color:#fff
-```
+![End-to-End Workflow](docs/flowchart.svg)
 
 ---
 

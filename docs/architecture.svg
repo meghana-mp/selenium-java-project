@@ -1,0 +1,55 @@
+<svg width="720" height="490" viewBox="0 0 720 490" xmlns="http://www.w3.org/2000/svg" font-family="Arial,Helvetica,sans-serif">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#9CA3AF"/>
+    </marker>
+  </defs>
+
+  <rect width="720" height="490" fill="#F8FAFC" rx="4"/>
+
+  <!-- TEST LAYER -->
+  <rect x="10" y="10" width="700" height="76" rx="8" fill="#3F51B5"/>
+  <text x="360" y="34" text-anchor="middle" fill="white" font-size="13" font-weight="bold" letter-spacing="1">TEST LAYER</text>
+  <text x="360" y="55" text-anchor="middle" fill="#C5CAE9" font-size="11">LoginTest · BookingTest · PaymentTest · SearchFilterTest · HybridApiUITest · AlertsTest</text>
+  <text x="360" y="75" text-anchor="middle" fill="#C5CAE9" font-size="10" font-style="italic">extends BaseTest — @BeforeMethod / @AfterMethod lifecycle, shared driver, loginWithDefaults()</text>
+
+  <!-- Arrow 1 -->
+  <line x1="360" y1="86" x2="360" y2="104" stroke="#9CA3AF" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="368" y="99" fill="#6B7280" font-size="10">instantiates</text>
+
+  <!-- PAGE OBJECT LAYER -->
+  <rect x="60" y="106" width="600" height="76" rx="8" fill="#00796B"/>
+  <text x="360" y="130" text-anchor="middle" fill="white" font-size="13" font-weight="bold" letter-spacing="1">PAGE OBJECT LAYER</text>
+  <text x="360" y="151" text-anchor="middle" fill="#B2DFDB" font-size="11">LoginPage · EventsPage · EventDetailPage · BookingPage · DashboardPage</text>
+  <text x="360" y="171" text-anchor="middle" fill="#B2DFDB" font-size="10" font-style="italic">extends BasePage — static fallback locators + dynamic MCP healing per method</text>
+
+  <!-- Arrow 2 -->
+  <line x1="360" y1="182" x2="360" y2="200" stroke="#9CA3AF" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="368" y="195" fill="#6B7280" font-size="10">delegates to</text>
+
+  <!-- UTILITY LAYER -->
+  <rect x="110" y="202" width="500" height="76" rx="8" fill="#2E7D32"/>
+  <text x="360" y="226" text-anchor="middle" fill="white" font-size="13" font-weight="bold" letter-spacing="1">UTILITY LAYER</text>
+  <text x="360" y="247" text-anchor="middle" fill="#C8E6C9" font-size="11">WebDriverWaitUtils · ActionUtils · TestUtils · ApiUtils · McpHealingUtils</text>
+  <text x="360" y="267" text-anchor="middle" fill="#C8E6C9" font-size="10" font-style="italic">waitForVisible · waitForVisibleWithFallback · waitForVisibleWithMcpHealing · jsClick</text>
+
+  <!-- Arrow 3 -->
+  <line x1="360" y1="278" x2="360" y2="296" stroke="#9CA3AF" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="368" y="291" fill="#6B7280" font-size="10">powered by</text>
+
+  <!-- INFRASTRUCTURE LAYER -->
+  <rect x="60" y="298" width="600" height="76" rx="8" fill="#BF360C"/>
+  <text x="360" y="322" text-anchor="middle" fill="white" font-size="13" font-weight="bold" letter-spacing="1">INFRASTRUCTURE LAYER</text>
+  <text x="360" y="343" text-anchor="middle" fill="#FFCCBC" font-size="11">BrowserFactory · ConfigManager · AppConstants</text>
+  <text x="360" y="363" text-anchor="middle" fill="#FFCCBC" font-size="10" font-style="italic">Singleton DCL · ThreadLocal WebDriver · Local ChromeDriver / Remote Grid switching</text>
+
+  <!-- Arrow 4 -->
+  <line x1="360" y1="374" x2="360" y2="392" stroke="#9CA3AF" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- SUPPORT LAYER -->
+  <rect x="10" y="394" width="700" height="86" rx="8" fill="#37474F"/>
+  <text x="360" y="418" text-anchor="middle" fill="white" font-size="13" font-weight="bold" letter-spacing="1">SUPPORT LAYER</text>
+  <text x="360" y="439" text-anchor="middle" fill="#CFD8DC" font-size="11">TestDataProvider · AllureListener · TestListener · RetryAnalyzer · RetryListener</text>
+  <text x="360" y="459" text-anchor="middle" fill="#CFD8DC" font-size="10" font-style="italic">TestNG Suite XMLs (smoke / regression / full) · JSON testdata (auth, booking, event, payment)</text>
+  <text x="360" y="475" text-anchor="middle" fill="#78909C" font-size="10">Each layer has a single responsibility and communicates downward only.</text>
+</svg>

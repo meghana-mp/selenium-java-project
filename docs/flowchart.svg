@@ -1,0 +1,293 @@
+<svg width="960" height="2100" viewBox="0 0 960 2100" xmlns="http://www.w3.org/2000/svg" font-family="Arial,Helvetica,sans-serif">
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#6B7280"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="2100" fill="#F8FAFC" rx="4"/>
+
+  <!-- ── ENTRY POINTS ──────────────────────────────────────── -->
+  <!-- LOCAL -->
+  <rect x="30" y="20" width="160" height="44" rx="22" fill="#4CAF50"/>
+  <text x="110" y="38" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Local</text>
+  <text x="110" y="55" text-anchor="middle" fill="white" font-size="10">mvn test</text>
+
+  <!-- DOCKER -->
+  <rect x="375" y="20" width="210" height="44" rx="22" fill="#0db7ed"/>
+  <text x="480" y="38" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Docker</text>
+  <text x="480" y="55" text-anchor="middle" fill="white" font-size="10">docker compose up</text>
+
+  <!-- JENKINS -->
+  <rect x="720" y="20" width="200" height="44" rx="22" fill="#D24939"/>
+  <text x="820" y="38" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Jenkins Pipeline</text>
+  <text x="820" y="55" text-anchor="middle" fill="white" font-size="10">github.com/meghana-mp/selenium-java-project</text>
+
+  <!-- Jenkins path -->
+  <line x1="820" y1="64" x2="820" y2="84" stroke="#6B7280" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="690" y="86" width="260" height="44" rx="6" fill="#fff" stroke="#D24939" stroke-width="1.5"/>
+  <text x="820" y="104" text-anchor="middle" fill="#1F2937" font-size="11" font-weight="bold">GitHub Checkout</text>
+  <text x="820" y="120" text-anchor="middle" fill="#6B7280" font-size="10">clone repo — branch: master</text>
+
+  <line x1="820" y1="130" x2="820" y2="150" stroke="#6B7280" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="690" y="152" width="260" height="44" rx="6" fill="#fff" stroke="#D24939" stroke-width="1.5"/>
+  <text x="820" y="170" text-anchor="middle" fill="#1F2937" font-size="11" font-weight="bold">Inject Credentials</text>
+  <text x="820" y="186" text-anchor="middle" fill="#6B7280" font-size="10">APP_EMAIL · APP_PASSWORD via withCredentials</text>
+
+  <line x1="820" y1="196" x2="820" y2="216" stroke="#6B7280" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="690" y="218" width="260" height="44" rx="6" fill="#fff" stroke="#D24939" stroke-width="1.5"/>
+  <text x="820" y="236" text-anchor="middle" fill="#1F2937" font-size="11" font-weight="bold">docker compose up</text>
+  <text x="820" y="252" text-anchor="middle" fill="#6B7280" font-size="10">-f docker-compose.yml (ARM64 Chromium)</text>
+
+  <!-- Converge lines → MVN -->
+  <!-- LOCAL → MVN -->
+  <path d="M 110 64 V 320 H 280" stroke="#6B7280" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+  <!-- DOCKER → MVN -->
+  <line x1="480" y1="64" x2="480" y2="320" stroke="#6B7280" stroke-width="1.5" marker-end="url(#a)"/>
+  <!-- JCI → MVN -->
+  <path d="M 820 262 V 345 H 680" stroke="#6B7280" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+
+  <!-- MVN -->
+  <rect x="280" y="322" width="400" height="50" rx="6" fill="#1565C0"/>
+  <text x="480" y="343" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Maven Surefire</text>
+  <text x="480" y="361" text-anchor="middle" fill="#BBDEFB" font-size="10">reads testng-suite.xml — suite param: smoke / regression / full</text>
+
+  <line x1="480" y1="372" x2="480" y2="392" stroke="#6B7280" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- TNG -->
+  <rect x="280" y="394" width="400" height="50" rx="6" fill="#1565C0"/>
+  <text x="480" y="415" text-anchor="middle" fill="white" font-size="12" font-weight="bold">TestNG Engine</text>
+  <text x="480" y="433" text-anchor="middle" fill="#BBDEFB" font-size="10">RetryListener · AllureListener · TestListener registered</text>
+
+  <line x1="480" y1="444" x2="480" y2="464" stroke="#6B7280" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- PAR -->
+  <rect x="370" y="466" width="220" height="40" rx="6" fill="#1565C0"/>
+  <text x="480" y="482" text-anchor="middle" fill="white" font-size="12" font-weight="bold">2 parallel threads</text>
+  <text x="480" y="498" text-anchor="middle" fill="#BBDEFB" font-size="10">thread-count=2</text>
+
+  <!-- T1 / T2 -->
+  <path d="M 480 506 V 526 H 230" stroke="#6B7280" stroke-width="1.5" fill="none"/>
+  <line x1="230" y1="526" x2="230" y2="546" stroke="#6B7280" stroke-width="1.5" marker-end="url(#a)"/>
+  <path d="M 480 506 V 526 H 730" stroke="#6B7280" stroke-width="1.5" fill="none"/>
+  <line x1="730" y1="526" x2="730" y2="546" stroke="#6B7280" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <rect x="155" y="548" width="150" height="36" rx="6" fill="#3949AB"/>
+  <text x="230" y="568" text-anchor="middle" fill="white" font-size="11">Thread 1</text>
+  <rect x="655" y="548" width="150" height="36" rx="6" fill="#3949AB"/>
+  <text x="730" y="568" text-anchor="middle" fill="white" font-size="11">Thread 2</text>
+
+  <!-- Threads into subgraph -->
+  <path d="M 230 584 V 620 H 370" stroke="#6B7280" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+  <path d="M 730 584 V 620 H 610" stroke="#6B7280" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+
+  <!-- ── PER THREAD SUBGRAPH ──────────────────────────────── -->
+  <rect x="20" y="600" width="920" height="1280" rx="10" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="480" y="622" text-anchor="middle" fill="#475569" font-size="11" font-weight="bold" letter-spacing="1">PER THREAD — IDENTICAL FLOW</text>
+
+  <!-- S1 -->
+  <rect x="360" y="630" width="240" height="44" rx="6" fill="#fff" stroke="#64748B" stroke-width="1.5"/>
+  <text x="480" y="648" text-anchor="middle" fill="#1F2937" font-size="11" font-weight="bold">@BeforeMethod setUp</text>
+  <text x="480" y="664" text-anchor="middle" fill="#6B7280" font-size="10">BrowserFactory.initDriver(browser)</text>
+
+  <line x1="480" y1="674" x2="480" y2="694" stroke="#6B7280" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- S3 diamond -->
+  <polygon points="480,696 610,730 480,764 350,730" fill="#FFF9C4" stroke="#F59E0B" stroke-width="1.5"/>
+  <text x="480" y="726" text-anchor="middle" fill="#78350F" font-size="10" font-weight="bold">SELENIUM_REMOTE_URL</text>
+  <text x="480" y="742" text-anchor="middle" fill="#78350F" font-size="10">set or not set?</text>
+
+  <!-- S4 left -->
+  <path d="M 350 730 H 190" stroke="#6B7280" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+  <text x="270" y="722" text-anchor="middle" fill="#6B7280" font-size="10">not set</text>
+  <rect x="80" y="752" width="220" height="44" rx="6" fill="#fff" stroke="#64748B" stroke-width="1.5"/>
+  <text x="190" y="770" text-anchor="middle" fill="#1F2937" font-size="11" font-weight="bold">Local ChromeDriver</text>
+  <text x="190" y="786" text-anchor="middle" fill="#6B7280" font-size="10">WebDriverManager auto-config</text>
+
+  <!-- S5 right -->
+  <path d="M 610 730 H 770" stroke="#6B7280" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+  <text x="690" y="722" text-anchor="middle" fill="#6B7280" font-size="10">set</text>
+  <rect x="660" y="752" width="220" height="44" rx="6" fill="#fff" stroke="#64748B" stroke-width="1.5"/>
+  <text x="770" y="770" text-anchor="middle" fill="#1F2937" font-size="11" font-weight="bold">RemoteWebDriver</text>
+  <text x="770" y="786" text-anchor="middle" fill="#6B7280" font-size="10">Selenium Grid — docker service</text>
+
+  <!-- S4/S5 → S6 converge -->
+  <path d="M 190 796 V 840 H 370" stroke="#6B7280" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+  <path d="M 770 796 V 840 H 590" stroke="#6B7280" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+
+  <!-- S6 -->
+  <rect x="370" y="842" width="220" height="44" rx="6" fill="#fff" stroke="#64748B" stroke-width="1.5"/>
+  <text x="480" y="860" text-anchor="middle" fill="#1F2937" font-size="11" font-weight="bold">driver.get(baseUrl)</text>
+  <text x="480" y="876" text-anchor="middle" fill="#6B7280" font-size="10">navigate to app.base.url from ConfigManager</text>
+
+  <line x1="480" y1="886" x2="480" y2="906" stroke="#6B7280" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- S7 -->
+  <rect x="350" y="908" width="260" height="44" rx="6" fill="#fff" stroke="#64748B" stroke-width="1.5"/>
+  <text x="480" y="926" text-anchor="middle" fill="#1F2937" font-size="11" font-weight="bold">@DataProvider</text>
+  <text x="480" y="942" text-anchor="middle" fill="#6B7280" font-size="10">reads JSON testdata (booking, auth, event, payment)</text>
+
+  <line x1="480" y1="952" x2="480" y2="972" stroke="#6B7280" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- S8 -->
+  <rect x="350" y="974" width="260" height="44" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+  <text x="480" y="992" text-anchor="middle" fill="#1565C0" font-size="11" font-weight="bold">Test Method</text>
+  <text x="480" y="1008" text-anchor="middle" fill="#1565C0" font-size="10">Allure.step() annotations — retry re-enters here</text>
+
+  <line x1="480" y1="1018" x2="480" y2="1038" stroke="#6B7280" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- S9 -->
+  <rect x="350" y="1040" width="260" height="44" rx="6" fill="#fff" stroke="#64748B" stroke-width="1.5"/>
+  <text x="480" y="1058" text-anchor="middle" fill="#1F2937" font-size="11" font-weight="bold">Page Object Method</text>
+  <text x="480" y="1074" text-anchor="middle" fill="#6B7280" font-size="10">EventsPage · EventDetailPage · BookingPage …</text>
+
+  <line x1="480" y1="1084" x2="480" y2="1104" stroke="#6B7280" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- ── SELF-HEALING SECTION ── -->
+  <rect x="50" y="1106" width="860" height="230" rx="8" fill="#F3E8FF" stroke="#9333EA" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="480" y="1122" text-anchor="middle" fill="#7C3AED" font-size="10" font-weight="bold" letter-spacing="1">SELF-HEALING LOCATOR CASCADE</text>
+
+  <!-- H1 diamond -->
+  <polygon points="280,1136 400,1170 280,1204 160,1170" fill="#EDE9FE" stroke="#7C3AED" stroke-width="1.5"/>
+  <text x="280" y="1166" text-anchor="middle" fill="#4C1D95" font-size="10" font-weight="bold">Primary locator</text>
+  <text x="280" y="1180" text-anchor="middle" fill="#4C1D95" font-size="10">found?</text>
+
+  <!-- H1 yes → right to S10 -->
+  <path d="M 400 1170 H 500" stroke="#6B7280" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+  <text x="452" y="1162" text-anchor="middle" fill="#16A34A" font-size="10" font-weight="bold">yes</text>
+
+  <!-- H1 no → down to H2 -->
+  <path d="M 280 1204 V 1240" stroke="#6B7280" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+  <text x="292" y="1226" fill="#DC2626" font-size="10" font-weight="bold">no</text>
+
+  <!-- H2 -->
+  <rect x="150" y="1242" width="260" height="44" rx="6" fill="#EDE9FE" stroke="#7C3AED" stroke-width="1.5"/>
+  <text x="280" y="1260" text-anchor="middle" fill="#4C1D95" font-size="11" font-weight="bold">Static fallback locators</text>
+  <text x="280" y="1276" text-anchor="middle" fill="#6D28D9" font-size="10">2 alternative By locators tried in order</text>
+
+  <!-- H2 found → right to S10 -->
+  <path d="M 410 1264 H 500" stroke="#6B7280" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+  <text x="458" y="1256" text-anchor="middle" fill="#16A34A" font-size="10" font-weight="bold">found</text>
+
+  <!-- H2 all fail → down to H3 -->
+  <path d="M 280 1286 V 1316" stroke="#6B7280" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+  <text x="296" y="1306" fill="#DC2626" font-size="10" font-weight="bold">all fail</text>
+
+  <!-- H3 -->
+  <rect x="130" y="1318" width="300" height="44" rx="6" fill="#4C1D95"/>
+  <text x="280" y="1336" text-anchor="middle" fill="white" font-size="11" font-weight="bold">Claude API — MCP Dynamic Healing</text>
+  <text x="280" y="1352" text-anchor="middle" fill="#DDD6FE" font-size="10">claude-haiku · page body → CSS/XPATH response · cached</text>
+
+  <!-- H3 → right to S10 -->
+  <path d="M 430 1340 H 500" stroke="#6B7280" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+
+  <!-- S10 -->
+  <rect x="502" y="1148" width="280" height="70" rx="6" fill="#fff" stroke="#64748B" stroke-width="1.5"/>
+  <text x="642" y="1168" text-anchor="middle" fill="#1F2937" font-size="11" font-weight="bold">WebDriverWaitUtils</text>
+  <text x="642" y="1184" text-anchor="middle" fill="#6B7280" font-size="10">waitForVisible / waitForClickable</text>
+  <text x="642" y="1200" text-anchor="middle" fill="#6B7280" font-size="10">waitForVisibleWithFallback / withMcpHealing</text>
+  <text x="642" y="1216" text-anchor="middle" fill="#6B7280" font-size="10">waitForClickableWithStaleRecovery</text>
+
+  <!-- S10 → S11 (exit self-healing box) -->
+  <line x1="642" y1="1218" x2="642" y2="1336" stroke="#6B7280" stroke-width="1.5" fill="none"/>
+  <path d="M 642 1336 H 590" stroke="#6B7280" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+
+  <!-- S11 -->
+  <rect x="340" y="1352" width="260" height="44" rx="6" fill="#fff" stroke="#64748B" stroke-width="1.5"/>
+  <text x="480" y="1370" text-anchor="middle" fill="#1F2937" font-size="11" font-weight="bold">ActionUtils</text>
+  <text x="480" y="1386" text-anchor="middle" fill="#6B7280" font-size="10">clearAndType · jsClick · scrollToElement · pause</text>
+
+  <line x1="480" y1="1396" x2="480" y2="1416" stroke="#6B7280" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- S12 -->
+  <rect x="350" y="1418" width="260" height="44" rx="6" fill="#fff" stroke="#64748B" stroke-width="1.5"/>
+  <text x="480" y="1436" text-anchor="middle" fill="#1F2937" font-size="11" font-weight="bold">Browser interaction</text>
+  <text x="480" y="1452" text-anchor="middle" fill="#6B7280" font-size="10">click · type · navigate · assert DOM state</text>
+
+  <line x1="480" y1="1462" x2="480" y2="1482" stroke="#6B7280" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- S13 diamond -->
+  <polygon points="480,1484 590,1520 480,1556 370,1520" fill="#FFF3E0" stroke="#F59E0B" stroke-width="1.5"/>
+  <text x="480" y="1516" text-anchor="middle" fill="#78350F" font-size="11" font-weight="bold">Assertion</text>
+  <text x="480" y="1532" text-anchor="middle" fill="#78350F" font-size="10">TestNG assert / assertTrue / assertEquals</text>
+
+  <!-- pass → S14 left -->
+  <path d="M 370 1520 H 240" stroke="#6B7280" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+  <text x="310" y="1512" text-anchor="middle" fill="#16A34A" font-size="10" font-weight="bold">pass</text>
+
+  <!-- PASS box -->
+  <rect x="120" y="1542" width="240" height="44" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+  <text x="240" y="1560" text-anchor="middle" fill="#166534" font-size="11" font-weight="bold">PASS logged</text>
+  <text x="240" y="1576" text-anchor="middle" fill="#166534" font-size="10">TestListener · Allure.step → success</text>
+  <path d="M 240 1520 V 1542" stroke="#6B7280" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+
+  <!-- fail → S15 right -->
+  <path d="M 590 1520 H 700" stroke="#6B7280" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+  <text x="642" y="1512" text-anchor="middle" fill="#DC2626" font-size="10" font-weight="bold">fail</text>
+
+  <!-- S15 diamond -->
+  <polygon points="790,1522 900,1556 790,1590 680,1556" fill="#FEE2E2" stroke="#EF4444" stroke-width="1.5"/>
+  <text x="790" y="1548" text-anchor="middle" fill="#7F1D1D" font-size="10" font-weight="bold">Smoke test?</text>
+  <text x="790" y="1562" text-anchor="middle" fill="#7F1D1D" font-size="10">RetryAnalyzer</text>
+  <text x="790" y="1576" text-anchor="middle" fill="#7F1D1D" font-size="9">(max 2 retries)</text>
+
+  <!-- no → S17 down -->
+  <path d="M 790 1590 V 1640" stroke="#6B7280" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+  <text x="804" y="1618" fill="#6B7280" font-size="10">no</text>
+
+  <!-- exhausted → S17 down (same path) already handled -->
+
+  <!-- retries left → S18 left then up -->
+  <path d="M 680 1556 H 580 V 1640" stroke="#6B7280" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+  <text x="626" y="1548" text-anchor="middle" fill="#D97706" font-size="10" font-weight="bold">retries left</text>
+
+  <!-- S18 -->
+  <rect x="460" y="1642" width="240" height="44" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+  <text x="580" y="1660" text-anchor="middle" fill="#78350F" font-size="11" font-weight="bold">Wait back-off</text>
+  <text x="580" y="1676" text-anchor="middle" fill="#78350F" font-size="10">1 s (retry 1) · 2 s (retry 2)</text>
+
+  <!-- S18 → back up to S8 -->
+  <path d="M 460 1664 H 80 V 996 H 350" stroke="#D97706" stroke-width="1.5" stroke-dasharray="5,3" fill="none" marker-end="url(#a)"/>
+  <text x="62" y="1340" fill="#D97706" font-size="10" transform="rotate(-90,62,1340)">retry → re-enter test method</text>
+
+  <!-- S17 -->
+  <rect x="660" y="1642" width="260" height="44" rx="6" fill="#FEE2E2" stroke="#EF4444" stroke-width="1.5"/>
+  <text x="790" y="1660" text-anchor="middle" fill="#7F1D1D" font-size="11" font-weight="bold">AllureListener</text>
+  <text x="790" y="1676" text-anchor="middle" fill="#7F1D1D" font-size="10">screenshot · URL · page title · stack trace</text>
+
+  <!-- S14 → S16, S17 → S16 -->
+  <path d="M 240 1586 V 1760 H 360" stroke="#6B7280" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+  <path d="M 790 1686 V 1760 H 620" stroke="#6B7280" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+
+  <!-- S16 -->
+  <rect x="360" y="1762" width="260" height="50" rx="6" fill="#fff" stroke="#64748B" stroke-width="1.5"/>
+  <text x="480" y="1782" text-anchor="middle" fill="#1F2937" font-size="11" font-weight="bold">@AfterMethod tearDown</text>
+  <text x="480" y="1798" text-anchor="middle" fill="#6B7280" font-size="10">driver.quit() · ThreadLocal.remove()</text>
+  <text x="480" y="1812" text-anchor="middle" fill="#6B7280" font-size="10">Allure result JSON written</text>
+
+  <!-- ── OUTPUT ── -->
+  <line x1="480" y1="1882" x2="480" y2="1900" stroke="#6B7280" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- R1 cylinder -->
+  <rect x="340" y="1902" width="280" height="44" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+  <ellipse cx="480" cy="1902" rx="140" ry="12" fill="#C5CAE9" stroke="#3F51B5" stroke-width="1.5"/>
+  <text x="480" y="1930" text-anchor="middle" fill="#1A237E" font-size="11" font-weight="bold">target/allure-results/</text>
+  <text x="480" y="1944" text-anchor="middle" fill="#3F51B5" font-size="10">raw JSON + failure screenshots</text>
+
+  <line x1="480" y1="1958" x2="480" y2="1978" stroke="#6B7280" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- R2 -->
+  <rect x="310" y="1980" width="340" height="44" rx="6" fill="#fff" stroke="#64748B" stroke-width="1.5"/>
+  <text x="480" y="1998" text-anchor="middle" fill="#1F2937" font-size="11" font-weight="bold">mvn allure:serve</text>
+  <text x="480" y="2014" text-anchor="middle" fill="#6B7280" font-size="10">or Jenkins Allure plugin (post-build action)</text>
+
+  <line x1="480" y1="2024" x2="480" y2="2044" stroke="#6B7280" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- R3 pill -->
+  <rect x="290" y="2046" width="380" height="44" rx="22" fill="#2196F3"/>
+  <text x="480" y="2064" text-anchor="middle" fill="white" font-size="12" font-weight="bold">HTML Report in browser</text>
+  <text x="480" y="2080" text-anchor="middle" fill="#BBDEFB" font-size="10">Overview · Suites · Behaviors · Timeline · Graphs</text>
+
+  <!-- S16 bottom → out of subgraph -->
+  <line x1="480" y1="1812" x2="480" y2="1878" stroke="#6B7280" stroke-width="1.5" marker-end="url(#a)"/>
+</svg>
