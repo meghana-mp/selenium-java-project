@@ -9,7 +9,7 @@
 ![RestAssured](https://img.shields.io/badge/RestAssured-5.3-brightgreen)
 ![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker)
 
-A multi-layered UI + API test automation framework** built in Java for the
+A multi-layered UI + API test automation framework built in Java for the
 [EventHub](https://eventhub.rahulshettyacademy.com) web application. The framework demonstrates software design patterns, parallel thread-safe execution,
 hybrid API-to-UI testing, self-healing locator fallback, automatic retry logic, and full Docker
 containerisation with Allure reporting.
