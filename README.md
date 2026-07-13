@@ -1,4 +1,4 @@
-# EventHub Selenium Automation Framework
+# Selenium Automation Framework
 
 ![Jenkins](https://img.shields.io/badge/CI-Jenkins-D24939?logo=jenkins&logoColor=white)
 ![Java](https://img.shields.io/badge/Java-21-orange?logo=openjdk)
